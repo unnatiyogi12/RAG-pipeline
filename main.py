@@ -8,7 +8,7 @@ load_dotenv()
 data = PyPDFLoader("data/pdf/DSML.pdf")
 docs = data.load()
 
-splitter = (
+splitter = RecursiveCharacterTextSplitter(
     chunk_size = 1000,
     chunk_overlap = 200
 )
