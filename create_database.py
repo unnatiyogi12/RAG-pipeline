@@ -10,9 +10,11 @@ from langchain_mistralai import MistralAIEmbeddings
 from dotenv import load_dotenv
 load_dotenv()
 
+# load pfd
 data = PyPDFLoader("data/pdf/DSML.pdf")
 docs = data.load()
 
+# split into chunks
 splitter = RecursiveCharacterTextSplitter(
     chunk_size = 1000,
     chunk_overlap = 200
@@ -20,7 +22,10 @@ splitter = RecursiveCharacterTextSplitter(
 
 chunks = splitter.split_documents(docs) 
 
+# create the embeddings
 embeddings_model = MistralAIEmbeddings()
+
+#  store into chunks
 
 vectorstore = Chroma.from_documents(
     documents= chunks,
